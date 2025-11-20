@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Attrition Predictor</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Employee Attrition Prediction</h1>
+    <p class="subtitle">Fill the employee details below to estimate the risk of attrition.</p>
+
+    <div class="form-grid">
+        <div class="field">
+            <label>Age</label>
+            <input type="number" id="Age">
+        </div>
+
+        <div class="field">
+            <label>Business Travel</label>
+            <select id="BusinessTravel">
+                <option value="Travel_Rarely">Travel_Rarely</option>
+                <option value="Travel_Frequently">Travel_Frequently</option>
+                <option value="Non-Travel">Non-Travel</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Department</label>
+            <select id="Department">
+                <option value="Sales">Sales</option>
+                <option value="Research & Development">Research & Development</option>
+                <option value="Human Resources">Human Resources</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Distance From Home</label>
+            <input type="number" id="DistanceFromHome">
+        </div>
+
+        <div class="field">
+            <label>Environment Satisfaction (1–4)</label>
+            <select id="EnvironmentSatisfaction">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Job Level</label>
+            <input type="number" id="JobLevel">
+        </div>
+
+        <div class="field">
+            <label>Job Satisfaction (1–4)</label>
+            <select id="JobSatisfaction">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Marital Status</label>
+            <select id="MaritalStatus">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Monthly Income</label>
+            <input type="number" id="MonthlyIncome">
+        </div>
+
+        <div class="field">
+            <label>Num Companies Worked</label>
+            <input type="number" id="NumCompaniesWorked">
+        </div>
+
+        <div class="field">
+            <label>OverTime</label>
+            <select id="OverTime">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Performance Rating (1–4)</label>
+            <select id="PerformanceRating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Relationship Satisfaction (1–4)</label>
+            <select id="RelationshipSatisfaction">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Work Life Balance (1–4)</label>
+            <select id="WorkLifeBalance">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Years Since Last Promotion</label>
+            <input type="number" id="YearsSinceLastPromotion">
+        </div>
+
+        <div class="field">
+            <label>Years At Company</label>
+            <input type="number" id="YearsAtCompany">
+        </div>
+    </div>
+
+    <button onclick="predict()">Predict Attrition</button>
+
+    <div id="result"></div>
+
+</div>
+
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <span class="close" id="closePopup">&times;</span>
+        <div class="prediction">
+            <h2>Prediction Result</h2>
+            <div class="predictionResult">
+                <div class="chart">
+                    <canvas id="gauge" width="400" height="180"></canvas>
+                    <div class="gauge-label" id="gaugeLabel">0%</div>
+                    <div class="gauge-sub">Attrition Risk Score</div>
+                </div>
+                <div class="cluster">
+                    <table class="clustertable">
+                        <tr>
+                            <th>Cluster1</th>
+                            <th>cluster3</th>
+                            <th>cluster3</th>
+                        </tr>
+        
+                        <tr>
+                            <td>Low</td>
+                            <td>Medium</td>
+                            <td>High</td>
+                        </tr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
