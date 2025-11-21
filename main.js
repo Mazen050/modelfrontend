@@ -191,7 +191,8 @@ function animateTo(target){
 document.getElementById('closePopup').addEventListener('click', function() {
     const pop = document.getElementById('popup');
     pop.style.display = "none";
-    document.querySelector(".cluster").style.display = "none";
+    // document.querySelector(".cluster").style.display = "none";
     animateTo(0);
 });
+
 
