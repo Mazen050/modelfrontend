@@ -65,6 +65,7 @@ th, td {
     background-color: #f2f2f2;
 }
 .cluster{
+    display: none;
     width: 50%;
 }
 
