@@ -11,6 +11,7 @@ const clusterInfo = {
 
 
 function predict() {
+    
 
     const RelationshipSatisfaction= Number(document.getElementById('RelationshipSatisfaction').value)
     const WorkLifeBalance= Number(document.getElementById('WorkLifeBalance').value)
@@ -22,6 +23,8 @@ function predict() {
 
     const EnvironmentSatisfaction = Number(document.getElementById('EnvironmentSatisfaction').value)
     const JobSatisfaction = Number(document.getElementById('JobSatisfaction').value)
+
+    console.log((DistanceFromHome)/MonthlyIncome)
     console.log("Predict button clicked");
     const data = {
         Age: Number(document.getElementById('Age').value),
@@ -56,11 +59,10 @@ function predict() {
     .then(res => res.json())
     .then(pred => {
         if (pred.prediction === 1) {
-            document.querySelector("#cluster").style.display = "block";
-            clusterInfo[pred.cluster];
             document.getElementById('status').innerText = clusterInfo[pred.cluster].status;
             document.getElementById('mobility').innerText = clusterInfo[pred.cluster].mobility;
             document.getElementById('burden').innerText = clusterInfo[pred.cluster].burden;
+            document.querySelector(".cluster").style.display = "block";
             const pop = document.getElementById('popup');
             pop.style.display = "flex";
             animateTo(pred.probability);
@@ -189,5 +191,6 @@ function animateTo(target){
 document.getElementById('closePopup').addEventListener('click', function() {
     const pop = document.getElementById('popup');
     pop.style.display = "none";
+    document.querySelector(".cluster").style.display = "none";
     animateTo(0);
 });
