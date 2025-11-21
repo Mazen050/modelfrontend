@@ -1,9 +1,24 @@
+const clusterInfo = {
+    0: {status: "Low", mobility: "High", burden: "High"},
+    1: {status: "Avg", mobility: "Low", burden: "Very Low"},
+    2: {status: "Very High", mobility: "High", burden: "High"},
+    3: {status: "Very High", mobility: "Low", burden: "High"},
+    4: {status: "Low", mobility: "High", burden: "Low"},
+    5: {status: "Low", mobility: "Low", burden: "High"},
+    6: {status: "Avg", mobility: "High", burden: "Very Low"},
+    7: {status: "Low", mobility: "Low", burden: "Low"},
+};
+
+
 function predict() {
 
     const RelationshipSatisfaction= Number(document.getElementById('RelationshipSatisfaction').value)
     const WorkLifeBalance= Number(document.getElementById('WorkLifeBalance').value)
     const YearsSinceLastPromotion= Number(document.getElementById('YearsSinceLastPromotion').value)
     const YearsAtCompany= Number(document.getElementById('YearsAtCompany').value)
+
+    const DistanceFromHome = Number(document.getElementById('DistanceFromHome').value)
+    const MonthlyIncome =  Number(document.getElementById('MonthlyIncome').value)
 
     const EnvironmentSatisfaction = Number(document.getElementById('EnvironmentSatisfaction').value)
     const JobSatisfaction = Number(document.getElementById('JobSatisfaction').value)
@@ -16,7 +31,7 @@ function predict() {
         JobLevel: Number(document.getElementById('JobLevel').value),
         MonthlyIncome: Number(document.getElementById('MonthlyIncome').value),
         NumCompaniesWorked: Number(document.getElementById('NumCompaniesWorked').value),
-        OverTime: 1.0,/////////////////////document.getElementById('OverTime').value,
+        OverTime: (document.getElementById('OverTime').value == "Yes"),
         PerformanceRating: Number(document.getElementById('PerformanceRating').value),
 
         "Department_Human Resources": (document.getElementById('Department').value == "Human Resources"),
@@ -41,6 +56,10 @@ function predict() {
     .then(res => res.json())
     .then(pred => {
         if (pred.prediction === 1) {
+            clusterInfo[pred.cluster];
+            document.getElementById('status').innerText = clusterInfo[pred.cluster].status;
+            document.getElementById('mobility').innerText = clusterInfo[pred.cluster].mobility;
+            document.getElementById('burden').innerText = clusterInfo[pred.cluster].burden;
             const pop = document.getElementById('popup');
             pop.style.display = "flex";
             animateTo(pred.probability);
