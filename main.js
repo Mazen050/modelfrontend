@@ -56,6 +56,7 @@ function predict() {
     .then(res => res.json())
     .then(pred => {
         if (pred.prediction === 1) {
+            document.querySelector("#cluster").style.display = "block";
             clusterInfo[pred.cluster];
             document.getElementById('status').innerText = clusterInfo[pred.cluster].status;
             document.getElementById('mobility').innerText = clusterInfo[pred.cluster].mobility;
