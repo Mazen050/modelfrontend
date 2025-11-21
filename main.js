@@ -59,9 +59,9 @@ function predict() {
     .then(res => res.json())
     .then(pred => {
         if (pred.prediction === 1) {
-            // document.getElementById('status').innerText = clusterInfo[pred.cluster].status;
-            // document.getElementById('mobility').innerText = clusterInfo[pred.cluster].mobility;
-            // document.getElementById('burden').innerText = clusterInfo[pred.cluster].burden;
+            document.getElementById('status').innerText = clusterInfo[pred.cluster].status;
+            document.getElementById('mobility').innerText = clusterInfo[pred.cluster].mobility;
+            document.getElementById('burden').innerText = clusterInfo[pred.cluster].burden;
             // document.querySelector(".cluster").style.display = "block";
             const pop = document.getElementById('popup');
             pop.style.display = "flex";
@@ -194,5 +194,6 @@ document.getElementById('closePopup').addEventListener('click', function() {
     // document.querySelector(".cluster").style.display = "none";
     animateTo(0);
 });
+
 
 
