@@ -64,7 +64,7 @@ function predict() {
         "OverallHappinessScore": (EnvironmentSatisfaction+JobSatisfaction+RelationshipSatisfaction)/3 
     };
 
-    fetch("http://127.0.0.1:8000/predict", {
+    fetch("https://aggressive-tabitha-seasondownloader-77d70152.koyeb.app/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
