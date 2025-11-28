@@ -79,6 +79,7 @@ function predict() {
         document.getElementById('feature1Percent').innerText = ((pred.top_features[1].shap_value * 100).toFixed(2)).toString()+'%';
         document.getElementById('feature2Percent').innerText = ((pred.top_features[2].shap_value * 100).toFixed(2)).toString()+'%';
         if (pred.prediction === 1) {
+            document.getElementById('features').style.display = "block";
             document.getElementById('status').innerText = clusterInfo[pred.cluster].status;
             document.getElementById('mobility').innerText = clusterInfo[pred.cluster].mobility;
             document.getElementById('burden').innerText = clusterInfo[pred.cluster].burden;
@@ -213,6 +214,7 @@ document.getElementById('closePopup').addEventListener('click', function() {
     const pop = document.getElementById('popup');
     pop.style.display = "none";
     document.querySelector("#cluster").style.display = "none";
+    document.getElementById('features').style.display = "none";
     animateTo(0);   
 });
 
