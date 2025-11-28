@@ -9,6 +9,19 @@ const clusterInfo = {
     7: {status: "Low", mobility: "Low", burden: "Low"},
 };
 
+function transform(busnT){
+    var ret = 0;
+    if(busnT === "Travel_Rarely"){
+        ret=1
+    }
+    else if(busnT === "Travel_Frequently"){
+        ret=2
+    }
+    else{
+        ret=0
+    }
+    return ret;
+}
 
 function predict() {
     
@@ -28,7 +41,7 @@ function predict() {
     console.log("Predict button clicked");
     const data = {
         Age: Number(document.getElementById('Age').value),
-        BusinessTravel: 1.0, ////////////////////
+        BusinessTravel: transform(document.querySelector('#BusinessTravel').value), ////////////////////
 
         DistanceFromHome: Number(document.getElementById('DistanceFromHome').value),
         JobLevel: Number(document.getElementById('JobLevel').value),
@@ -51,18 +64,25 @@ function predict() {
         "OverallHappinessScore": (EnvironmentSatisfaction+JobSatisfaction+RelationshipSatisfaction)/3 
     };
 
-    fetch("https://aggressive-tabitha-seasondownloader-77d70152.koyeb.app/predict", {
+    fetch("http://127.0.0.1:8000/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     })
     .then(res => res.json())
     .then(pred => {
+        console.log("Prediction received:", pred.top_features);
+        document.getElementById('feature').innerText = pred.top_features[0].feature;
+        document.getElementById('feature1').innerText = pred.top_features[1].feature;
+        document.getElementById('feature2').innerText = pred.top_features[2].feature;
+        document.getElementById('featurePercent').innerText = ((pred.top_features[0].shap_value * 100).toFixed(2)).toString()+'%';
+        document.getElementById('feature1Percent').innerText = ((pred.top_features[1].shap_value * 100).toFixed(2)).toString()+'%';
+        document.getElementById('feature2Percent').innerText = ((pred.top_features[2].shap_value * 100).toFixed(2)).toString()+'%';
         if (pred.prediction === 1) {
             document.getElementById('status').innerText = clusterInfo[pred.cluster].status;
             document.getElementById('mobility').innerText = clusterInfo[pred.cluster].mobility;
             document.getElementById('burden').innerText = clusterInfo[pred.cluster].burden;
-            // document.querySelector(".cluster").style.display = "block";
+            document.querySelector("#cluster").style.display = "block";
             const pop = document.getElementById('popup');
             pop.style.display = "flex";
             animateTo(pred.probability);
@@ -71,6 +91,7 @@ function predict() {
             pop.style.display = "flex";
             animateTo(pred.probability);
         }
+
     })
     .catch(err => {
         document.getElementById('result').innerHTML = "Error connecting to server.";
@@ -191,9 +212,17 @@ function animateTo(target){
 document.getElementById('closePopup').addEventListener('click', function() {
     const pop = document.getElementById('popup');
     pop.style.display = "none";
-    // document.querySelector(".cluster").style.display = "none";
-    animateTo(0);
+    document.querySelector("#cluster").style.display = "none";
+    animateTo(0);   
 });
 
 
+//slider
+const slider = document.getElementById("PerformanceRating");
+const display = document.getElementById("perf-display");
+console.log(slider);
+display.textContent = slider.value; // initial value
 
+slider.addEventListener("input", () => {
+    display.textContent = slider.value;
+});
