@@ -31,7 +31,7 @@ function predict() {
     const YearsSinceLastPromotion= Number(document.getElementById('YearsSinceLastPromotion').value)
     const YearsAtCompany= Number(document.getElementById('YearsAtCompany').value)
 
-    const DistanceFromHome = Number(document.getElementById('DistanceFromHome').value)
+    const DistanceFromHome = Number(document.getElementById('distanceFromHome').value)
     const MonthlyIncome =  Number(document.getElementById('MonthlyIncome').value)
 
     const EnvironmentSatisfaction = Number(document.getElementById('EnvironmentSatisfaction').value)
@@ -43,7 +43,7 @@ function predict() {
         Age: Number(document.getElementById('Age').value),
         BusinessTravel: transform(document.querySelector('#BusinessTravel').value), ////////////////////
 
-        DistanceFromHome: Number(document.getElementById('DistanceFromHome').value),
+        DistanceFromHome: Number(document.getElementById('distanceFromHome').value),
         JobLevel: Number(document.getElementById('JobLevel').value),
         MonthlyIncome: Number(document.getElementById('MonthlyIncome').value),
         NumCompaniesWorked: Number(document.getElementById('NumCompaniesWorked').value),
@@ -64,7 +64,7 @@ function predict() {
         "OverallHappinessScore": (EnvironmentSatisfaction+JobSatisfaction+RelationshipSatisfaction)/3 
     };
 
-    fetch("https://aggressive-tabitha-seasondownloader-77d70152.koyeb.app/predict", {
+    fetch("http://127.0.0.1:8000/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -72,14 +72,14 @@ function predict() {
     .then(res => res.json())
     .then(pred => {
         console.log("Prediction received:", pred.top_features);
-        document.getElementById('feature').innerText = pred.top_features[0].feature;
-        document.getElementById('feature1').innerText = pred.top_features[1].feature;
-        document.getElementById('feature2').innerText = pred.top_features[2].feature;
-        document.getElementById('featurePercent').innerText = ((pred.top_features[0].shap_value * 100).toFixed(2)).toString()+'%';
-        document.getElementById('feature1Percent').innerText = ((pred.top_features[1].shap_value * 100).toFixed(2)).toString()+'%';
-        document.getElementById('feature2Percent').innerText = ((pred.top_features[2].shap_value * 100).toFixed(2)).toString()+'%';
+        document.getElementById('feature').innerText = pred.top_features.reasons[0];
+        document.getElementById('feature1').innerText = pred.top_features.reasons[1];
+        document.getElementById('feature2').innerText = pred.top_features.reasons[2];
+        // document.getElementById('featurePercent').innerText = ((pred.top_features.top3_table[0].shap_value * 100).toFixed(2)).toString()+'%';
+        // document.getElementById('feature1Percent').innerText = ((pred.top_features.top3_table[1].shap_value * 100).toFixed(2)).toString()+'%';
+        // document.getElementById('feature2Percent').innerText = ((pred.top_features.top3_table[2].shap_value * 100).toFixed(2)).toString()+'%';
+        document.getElementById('features').style.display = "block";
         if (pred.prediction === 1) {
-            document.getElementById('features').style.display = "block";
             document.getElementById('status').innerText = clusterInfo[pred.cluster].status;
             document.getElementById('mobility').innerText = clusterInfo[pred.cluster].mobility;
             document.getElementById('burden').innerText = clusterInfo[pred.cluster].burden;
@@ -222,9 +222,28 @@ document.getElementById('closePopup').addEventListener('click', function() {
 //slider
 const slider = document.getElementById("PerformanceRating");
 const display = document.getElementById("perf-display");
-console.log(slider);
 display.textContent = slider.value; // initial value
 
 slider.addEventListener("input", () => {
     display.textContent = slider.value;
+});
+
+const slider1 = document.getElementById("MonthlyIncome");
+const display1 = document.getElementById("perf-display-month");
+display1.value = slider1.value; // initial value
+
+display1.addEventListener("input", () => {
+    slider1.value = display1.value;
+});
+
+slider1.addEventListener("input", () => {
+    display1.value = slider1.value;
+});
+
+const slider2 = document.getElementById("distanceFromHome");
+const display2 = document.getElementById("perf-display-distance");
+display2.textContent = slider2.value; // initial value
+
+slider2.addEventListener("input", () => {
+    display2.textContent = slider2.value;
 });
