@@ -36,7 +36,7 @@
 
         <div>
             <label class="font-semibold text-sm mb-1 block">Age</label>
-            <input id="Age" type="number" min="0"
+            <input id="Age" type="number" min="0" placeholder="e.g., 20"
                 class="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:outline-none">
         </div>
 
@@ -61,8 +61,8 @@
         </div>
 
         <div>
-            <label class="font-semibold text-sm mb-1 block">Distance From Home (KM)</label>
-            <input id="DistanceFromHome" type="number" min="0"
+            <label class="font-semibold text-sm mb-1 block">Distance From Home (km)</label>
+            <input id="DistanceFromHome" type="number" min="0" placeholder="e.g., 15"
                 class="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:outline-none">
         </div>
 
@@ -111,14 +111,14 @@
         </div>
 
         <div>
-            <label class="font-semibold text-sm mb-1 block">Monthly Income $</label>
-            <input id="MonthlyIncome" type="number" min="0"
+            <label class="font-semibold text-sm mb-1 block">Monthly Income ($USD)</label>
+            <input id="MonthlyIncome" type="number" min="0" placeholder="e.g., 5000"
                 class="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:outline-none">
         </div>
 
         <div>
             <label class="font-semibold text-sm mb-1 block">Num Companies Worked</label>
-            <input id="NumCompaniesWorked" type="number" min="0"
+            <input id="NumCompaniesWorked" type="number" min="0" placeholder="e.g., 3"
                 class="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:outline-none">
         </div>
 
@@ -174,13 +174,13 @@
 
         <div>
             <label class="font-semibold text-sm mb-1 block">Years Since Last Promotion</label>
-            <input id="YearsSinceLastPromotion" type="number" min="0"
+            <input id="YearsSinceLastPromotion" type="number" min="0" placeholder="e.g., 2"
                 class="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:outline-none">
         </div>
 
         <div>
             <label class="font-semibold text-sm mb-1 block">Years At Company</label>
-            <input id="YearsAtCompany" type="number" min="0"
+            <input id="YearsAtCompany" type="number" min="0" placeholder="e.g., 5"
                 class="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:outline-none">
         </div>
 
@@ -205,7 +205,7 @@
         <h2 class="text-xl font-semibold mt-4 text-gray-800 text-center">Prediction Result</h2>
         
         <div class="grid grid-cols-3 grid-rows-1 gap-4">
-            <div id="features" class="mt-8 w-full md:w-1/2 mx-1">
+            <div id="features" class="hidden w-full md:w-1/2 mx-1">
                 <h2 class="w-full text-center font-semibold my-1">Important Features</h2>
                 <table class="w-full border-collapse text-center">
                     <tbody class="text-gray-800">
@@ -225,7 +225,7 @@
                 </table>
             </div>
 
-            <div class="flex flex-col items-center mt-6">
+            <div class="col-start-2 flex flex-col items-center mt-6">
                 <canvas id="gauge" width="400" height="180"></canvas>
                 <div id="gaugeLabel" class="mt-2 text-lg font-bold text-gray-800 text-center">0%</div>
                 <div class="text-gray-500 text-sm mt-1 text-center">Attrition Risk Score</div>
