@@ -46,7 +46,7 @@ function predict() {
         DistanceFromHome: Number(document.getElementById('distanceFromHome').value),
         JobLevel: Number(document.getElementById('JobLevel').value),
         MonthlyIncome: Number(document.getElementById('MonthlyIncome').value),
-        NumCompaniesWorked: Number(document.getElementById('NumCompaniesWorked').value),
+        // NumCompaniesWorked: Number(document.getElementById('NumCompaniesWorked').value),
         OverTime: (document.getElementById('OverTime').value == "Yes"),
         PerformanceRating: Number(document.getElementById('PerformanceRating').value),
 
@@ -64,7 +64,7 @@ function predict() {
         "OverallHappinessScore": (EnvironmentSatisfaction+JobSatisfaction+RelationshipSatisfaction)/3 
     };
 
-    fetch("https://aggressive-tabitha-seasondownloader-77d70152.koyeb.app/predict", {
+    fetch("http://127.0.0.1:8000/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -246,5 +246,4 @@ display2.textContent = slider2.value; // initial value
 
 slider2.addEventListener("input", () => {
     display2.textContent = slider2.value;
-
 });
